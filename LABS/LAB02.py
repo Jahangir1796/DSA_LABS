@@ -1,240 +1,283 @@
-# --------MODULE 2: NUMPY-------------
+# # -----------------CLASS WORK----------------
+import numpy as np 
+even = np.array([2, 4, 6, 8])
+odd = np.array([1, 3, 5, 7])
+print("a * b (element-wise):", even * odd)      # vector
+print("a @ b (dot product) :", even @ odd)      # scalar
 
-# *****Broadcasting and Vectorised Thinking*****
+# print(np.argmax(even))
+# print(np.argmax(odd))
 
-# --------------------TASK01----------------
-import numpy as np
+# print(np.argmin(even))
+# print(np.argmin(odd))
 
-arr = np.array([
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12],
-    [13, 14, 15, 16]
-])
 
-result = arr + 10
+# X: 4 students, features [hours, attendance]; add a bias column of 1s
+X = np.array([[2, 60, 1],
+              [8, 90, 1],
+              [5, 75, 1],
+              [1, 40, 1]], dtype=float)
+w = np.array([4.0, 0.5, 20.0])      # weights: per-hour, per-attend, bias
+pred = X @ w                        # ALL predictions at once
+print("predictions:", pred)
 
-print(result)
+# We add a bias because it allows the model to have a non-zero baseline prediction and shift 
+# the decision/prediction function instead of forcing it to pass through the origin.
+# TO NORMALIZE THINGS 
 
 
 
-# -----------------------TASK02----------------------
-import numpy as np
+# Solve A x = b  for x
+A = np.array([[3.0, 2.0],
+              [1.0, 4.0]])
+b = np.array([12.0, 14.0])
+x = np.linalg.solve(A, b)
+print("solution x:", x)
+print("check A@x == b:", np.allclose(A @ x, b))
 
-table = np.array([
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [10, 11, 12],
-    [13, 14, 15]
-])
 
-row_vector = np.array([10, 20, 30])
 
-result = table + row_vector
 
-print(result)
 
 
 
-# ----------------TASK03----------------
+# # --------MODULE 2: NUMPY-------------
 
-import numpy as np
+# # *****Broadcasting and Vectorised Thinking*****
 
-A = np.array([
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12]
-])
+# # --------------------TASK01----------------
+# import numpy as np
 
-B = np.array([1, 2, 3])
+# arr = np.array([
+#     [1, 2, 3, 4],
+#     [5, 6, 7, 8],
+#     [9, 10, 11, 12],
+#     [13, 14, 15, 16]
+# ])
 
-# Attempt that causes a shape mismatch
-try:
-    result = A + B
-    print(result)
-except ValueError as e:
-    print("Error:", e)
+# result = arr + 10
 
-# Fix by reshaping B from (3,) to (3,1)
-B_fixed = B.reshape(3, 1)
+# print(result)
 
-result = A + B_fixed
 
-print("After reshaping:")
-print(result)
 
+# # -----------------------TASK02----------------------
+# import numpy as np
 
-# ------------TASK04-----------
-import numpy as np
+# table = np.array([
+#     [1, 2, 3],
+#     [4, 5, 6],
+#     [7, 8, 9],
+#     [10, 11, 12],
+#     [13, 14, 15]
+# ])
 
-A = np.array([
-    [1, 2, 3, 4],
-    [5, 6, 7, 8],
-    [9, 10, 11, 12]
-])
+# row_vector = np.array([10, 20, 30])
 
-B = np.array([
-    [2],
-    [3],
-    [4]
-])
+# result = table + row_vector
 
-result = A * B
+# print(result)
 
-print(result)
 
 
+# # ----------------TASK03----------------
 
-# ---------------TASK05------------------------
-import numpy as np
+# import numpy as np
 
-np.random.seed(42)
+# A = np.array([
+#     [1, 2, 3, 4],
+#     [5, 6, 7, 8],
+#     [9, 10, 11, 12]
+# ])
 
-data = np.random.uniform(1, 100, size=(10, 3))
+# B = np.array([1, 2, 3])
 
-standardised = (data - data.mean(axis=0)) / data.std(axis=0)
+# # Attempt that causes a shape mismatch
+# try:
+#     result = A + B
+#     print(result)
+# except ValueError as e:
+#     print("Error:", e)
 
-print("Original data:")
-print(data)
+# # Fix by reshaping B from (3,) to (3,1)
+# B_fixed = B.reshape(3, 1)
 
-print("\nStandardised data:")
-print(standardised)
+# result = A + B_fixed
 
+# print("After reshaping:")
+# print(result)
 
-# *******Fancy Indexing, Masks and Reshaping*******
 
-# -----------------TASK01----------------
-import numpy as np
+# # ------------TASK04-----------
+# import numpy as np
 
-data = np.array([10, 20, 30, 40, 50])
+# A = np.array([
+#     [1, 2, 3, 4],
+#     [5, 6, 7, 8],
+#     [9, 10, 11, 12]
+# ])
 
-result = data[[4, 0, 4]]
+# B = np.array([
+#     [2],
+#     [3],
+#     [4]
+# ])
 
-print(result)
+# result = A * B
 
-# -----------------TASK02----------------
-import numpy as np
+# print(result)
 
-data = np.array([15, 25, 35, 45, 55])
 
-result = data[(data > 40) | (data < 20)]
 
-print(result)
+# # ---------------TASK05------------------------
+# import numpy as np
 
+# np.random.seed(42)
 
-# ---------------TASK03----------------
-import numpy as np
+# data = np.random.uniform(1, 100, size=(10, 3))
 
-x = np.arange(12)
+# standardised = (data - data.mean(axis=0)) / data.std(axis=0)
 
-result = x.reshape(3, -1)
+# print("Original data:")
+# print(data)
 
-print(result)
-print("Shape:", result.shape)
+# print("\nStandardised data:")
+# print(standardised)
 
 
-# ------------TASK04----------------
-import numpy as np
+# # *******Fancy Indexing, Masks and Reshaping*******
 
-a = np.array([1, 2])
-b = np.array([3, 4])
+# # -----------------TASK01----------------
+# import numpy as np
 
-horizontal = np.hstack([a, b])
-vertical = np.vstack([a, b])
+# data = np.array([10, 20, 30, 40, 50])
 
-print("Horizontal:")
-print(horizontal)
+# result = data[[4, 0, 4]]
 
-print("Vertical:")
-print(vertical)
+# print(result)
 
+# # -----------------TASK02----------------
+# import numpy as np
 
+# data = np.array([15, 25, 35, 45, 55])
 
-# --------------TASK05----------------
-import numpy as np
+# result = data[(data > 40) | (data < 20)]
 
-data = np.array([
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9],
-    [10, 11, 12]
-])
+# print(result)
 
-flattened = data.flatten()
 
-column = flattened.reshape(-1, 1)
+# # ---------------TASK03----------------
+# import numpy as np
 
-print("Flattened:")
-print(flattened)
+# x = np.arange(12)
 
-print("\nFinal column:")
-print(column)
+# result = x.reshape(3, -1)
 
-print("\nFinal shape:", column.shape)
+# print(result)
+# print("Shape:", result.shape)
 
 
+# # ------------TASK04----------------
+# import numpy as np
 
-# ******Mathematical and Linear Algebra Operations******  
+# a = np.array([1, 2])
+# b = np.array([3, 4])
 
-# -------------TASK01----------------
+# horizontal = np.hstack([a, b])
+# vertical = np.vstack([a, b])
 
-import numpy as np
+# print("Horizontal:")
+# print(horizontal)
 
-x = np.array([1, 2, 3, 4, 5])
+# print("Vertical:")
+# print(vertical)
 
-log_result = np.log(x)
-sqrt_result = np.sqrt(x)
 
-print("Log:", log_result)
-print("Square Root:", sqrt_result)
 
-# ------------TASK02----------------
+# # --------------TASK05----------------
+# import numpy as np
 
-import numpy as np
+# data = np.array([
+#     [1, 2, 3],
+#     [4, 5, 6],
+#     [7, 8, 9],
+#     [10, 11, 12]
+# ])
 
-probabilities = np.array([0.1, 0.7, 0.2])
+# flattened = data.flatten()
 
-predicted_class = probabilities.argmax()
+# column = flattened.reshape(-1, 1)
 
-print("Predicted class index:", predicted_class)
+# print("Flattened:")
+# print(flattened)
 
+# print("\nFinal column:")
+# print(column)
 
-# -----------------------TASK03----------------
-import numpy as np
+# print("\nFinal shape:", column.shape)
 
-a = np.array([1, 2, 3])
-b = np.array([4, 5, 6])
 
-element_wise = a * b
-dot_product = a @ b
 
-print("Element-wise multiplication:", element_wise)
-print("Dot product:", dot_product)
+# # ******Mathematical and Linear Algebra Operations******  
 
+# # -------------TASK01----------------
 
-# -----------------TASK04----------------
-import numpy as np
+# import numpy as np
 
-X = np.array([
-    [2, 3],
-    [4, 5],
-    [6, 7]
-])
+# x = np.array([1, 2, 3, 4, 5])
 
-w = np.array([10, 2])
+# log_result = np.log(x)
+# sqrt_result = np.sqrt(x)
 
-predictions = X @ w
+# print("Log:", log_result)
+# print("Square Root:", sqrt_result)
 
-print("Predictions:", predictions)
+# # ------------TASK02----------------
 
+# import numpy as np
 
-# --------------------TASK05----------------
-import numpy as np
+# probabilities = np.array([0.1, 0.7, 0.2])
 
-values = np.array([10, 20, 30])
-weights = np.array([0.2, 0.5, 0.3])
+# predicted_class = probabilities.argmax()
 
-method1 = (values * weights).sum()
+# print("Predicted class index:", predicted_class)
 
-print("Method 1:", method1)
+
+# # -----------------------TASK03----------------
+# import numpy as np
+
+# a = np.array([1, 2, 3])
+# b = np.array([4, 5, 6])
+
+# element_wise = a * b
+# dot_product = a @ b
+
+# print("Element-wise multiplication:", element_wise)
+# print("Dot product:", dot_product)
+
+
+# # -----------------TASK04----------------
+# import numpy as np
+
+# X = np.array([
+#     [2, 3],
+#     [4, 5],
+#     [6, 7]
+# ])
+
+# w = np.array([10, 2])
+
+# predictions = X @ w
+
+# print("Predictions:", predictions)
+
+
+# # --------------------TASK05----------------
+# import numpy as np
+
+# values = np.array([10, 20, 30])
+# weights = np.array([0.2, 0.5, 0.3])
+
+# method1 = (values * weights).sum()
+
+# print("Method 1:", method1)
