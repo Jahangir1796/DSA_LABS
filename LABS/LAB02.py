@@ -41,243 +41,244 @@ print("check A@x == b:", np.allclose(A @ x, b))
 
 
 
-# # --------MODULE 2: NUMPY-------------
+# --------MODULE 2: NUMPY-------------
 
-# # *****Broadcasting and Vectorised Thinking*****
+# *****Broadcasting and Vectorised Thinking*****
 
-# # --------------------TASK01----------------
-# import numpy as np
+# --------------------TASK01----------------
+import numpy as np
 
-# arr = np.array([
-#     [1, 2, 3, 4],
-#     [5, 6, 7, 8],
-#     [9, 10, 11, 12],
-#     [13, 14, 15, 16]
-# ])
+arr = np.array([
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12],
+    [13, 14, 15, 16]
+])
 
-# result = arr + 10
+result = arr + 10
 
-# print(result)
+print(result)
 
 
 
-# # -----------------------TASK02----------------------
-# import numpy as np
+# -----------------------TASK02----------------------
+print("TASK02")
+import numpy as np
 
-# table = np.array([
-#     [1, 2, 3],
-#     [4, 5, 6],
-#     [7, 8, 9],
-#     [10, 11, 12],
-#     [13, 14, 15]
-# ])
+table = np.array([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [10, 11, 12],
+    [13, 14, 15]
+])
 
-# row_vector = np.array([10, 20, 30])
+row_vector = np.array([10, 20, 30])
 
-# result = table + row_vector
+result = table + row_vector
 
-# print(result)
+print(result)
 
 
 
-# # ----------------TASK03----------------
+# ----------------TASK03----------------
 
-# import numpy as np
+import numpy as np
+print("TASK03")
+A = np.array([
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+])
 
-# A = np.array([
-#     [1, 2, 3, 4],
-#     [5, 6, 7, 8],
-#     [9, 10, 11, 12]
-# ])
+B = np.array([1, 2, 3])
 
-# B = np.array([1, 2, 3])
+# Attempt that causes a shape mismatch
+try:
+    result = A + B
+    print(result)
+except ValueError as e:
+    print("Error:", e)
 
-# # Attempt that causes a shape mismatch
-# try:
-#     result = A + B
-#     print(result)
-# except ValueError as e:
-#     print("Error:", e)
+# Fix by reshaping B from (3,) to (3,1)
+B_fixed = B.reshape(3, 1)
 
-# # Fix by reshaping B from (3,) to (3,1)
-# B_fixed = B.reshape(3, 1)
+result = A + B_fixed
 
-# result = A + B_fixed
+print("After reshaping:")
+print(result)
 
-# print("After reshaping:")
-# print(result)
 
+# ------------TASK04-----------
+import numpy as np
+print("TASK04")
+A = np.array([
+    [1, 2, 3, 4],
+    [5, 6, 7, 8],
+    [9, 10, 11, 12]
+])
 
-# # ------------TASK04-----------
-# import numpy as np
+B = np.array([
+    [2],
+    [3],
+    [4]
+])
 
-# A = np.array([
-#     [1, 2, 3, 4],
-#     [5, 6, 7, 8],
-#     [9, 10, 11, 12]
-# ])
+result = A * B
 
-# B = np.array([
-#     [2],
-#     [3],
-#     [4]
-# ])
+print(result)
 
-# result = A * B
 
-# print(result)
 
+# ---------------TASK05------------------------
+import numpy as np
+print("TASK05")
+np.random.seed(42)
 
+data = np.random.uniform(1, 100, size=(10, 3))
 
-# # ---------------TASK05------------------------
-# import numpy as np
+standardised = (data - data.mean(axis=0)) / data.std(axis=0)
 
-# np.random.seed(42)
+print("Original data:")
+print(data)
 
-# data = np.random.uniform(1, 100, size=(10, 3))
+print("\nStandardised data:")
+print(standardised)
 
-# standardised = (data - data.mean(axis=0)) / data.std(axis=0)
 
-# print("Original data:")
-# print(data)
+# *******Fancy Indexing, Masks and Reshaping*******
+print("Fancy Indexing, Masks and Reshaping")
+# -----------------TASK01----------------
+import numpy as np
+print("TASK01")
+data = np.array([10, 20, 30, 40, 50])
 
-# print("\nStandardised data:")
-# print(standardised)
+result = data[[4, 0, 4]]
 
+print(result)
 
-# # *******Fancy Indexing, Masks and Reshaping*******
+# -----------------TASK02----------------
+import numpy as np
+print("TASK02")
+data = np.array([15, 25, 35, 45, 55])
 
-# # -----------------TASK01----------------
-# import numpy as np
+result = data[(data > 40) | (data < 20)]
 
-# data = np.array([10, 20, 30, 40, 50])
+print(result)
 
-# result = data[[4, 0, 4]]
 
-# print(result)
+# ---------------TASK03----------------
+import numpy as np
+print("TASK03")
+x = np.arange(12)
 
-# # -----------------TASK02----------------
-# import numpy as np
+result = x.reshape(3, -1)
 
-# data = np.array([15, 25, 35, 45, 55])
+print(result)
+print("Shape:", result.shape)
 
-# result = data[(data > 40) | (data < 20)]
 
-# print(result)
+# ------------TASK04----------------
+import numpy as np
+print("TASK04")
+a = np.array([1, 2])
+b = np.array([3, 4])
 
+horizontal = np.hstack([a, b])
+vertical = np.vstack([a, b])
 
-# # ---------------TASK03----------------
-# import numpy as np
+print("Horizontal:")
+print(horizontal)
 
-# x = np.arange(12)
+print("Vertical:")
+print(vertical)
 
-# result = x.reshape(3, -1)
 
-# print(result)
-# print("Shape:", result.shape)
 
+# --------------TASK05----------------
+import numpy as np
+print("TASK05")
+data = np.array([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [10, 11, 12]
+])
 
-# # ------------TASK04----------------
-# import numpy as np
+flattened = data.flatten()
 
-# a = np.array([1, 2])
-# b = np.array([3, 4])
+column = flattened.reshape(-1, 1)
 
-# horizontal = np.hstack([a, b])
-# vertical = np.vstack([a, b])
+print("Flattened:")
+print(flattened)
 
-# print("Horizontal:")
-# print(horizontal)
+print("\nFinal column:")
+print(column)
 
-# print("Vertical:")
-# print(vertical)
+print("\nFinal shape:", column.shape)
 
 
 
-# # --------------TASK05----------------
-# import numpy as np
+# ******Mathematical and Linear Algebra Operations******  
 
-# data = np.array([
-#     [1, 2, 3],
-#     [4, 5, 6],
-#     [7, 8, 9],
-#     [10, 11, 12]
-# ])
+# -------------TASK01----------------
 
-# flattened = data.flatten()
+import numpy as np
 
-# column = flattened.reshape(-1, 1)
+x = np.array([1, 2, 3, 4, 5])
 
-# print("Flattened:")
-# print(flattened)
+log_result = np.log(x)
+sqrt_result = np.sqrt(x)
 
-# print("\nFinal column:")
-# print(column)
+print("Log:", log_result)
+print("Square Root:", sqrt_result)
 
-# print("\nFinal shape:", column.shape)
+# ------------TASK02----------------
 
+import numpy as np
 
+probabilities = np.array([0.1, 0.7, 0.2])
 
-# # ******Mathematical and Linear Algebra Operations******  
+predicted_class = probabilities.argmax()
 
-# # -------------TASK01----------------
+print("Predicted class index:", predicted_class)
 
-# import numpy as np
 
-# x = np.array([1, 2, 3, 4, 5])
+# -----------------------TASK03----------------
+import numpy as np
 
-# log_result = np.log(x)
-# sqrt_result = np.sqrt(x)
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
 
-# print("Log:", log_result)
-# print("Square Root:", sqrt_result)
+element_wise = a * b
+dot_product = a @ b
 
-# # ------------TASK02----------------
+print("Element-wise multiplication:", element_wise)
+print("Dot product:", dot_product)
 
-# import numpy as np
 
-# probabilities = np.array([0.1, 0.7, 0.2])
+# -----------------TASK04----------------
+import numpy as np
 
-# predicted_class = probabilities.argmax()
+X = np.array([
+    [2, 3],
+    [4, 5],
+    [6, 7]
+])
 
-# print("Predicted class index:", predicted_class)
+w = np.array([10, 2])
 
+predictions = X @ w
 
-# # -----------------------TASK03----------------
-# import numpy as np
+print("Predictions:", predictions)
 
-# a = np.array([1, 2, 3])
-# b = np.array([4, 5, 6])
 
-# element_wise = a * b
-# dot_product = a @ b
+# --------------------TASK05----------------
+import numpy as np
 
-# print("Element-wise multiplication:", element_wise)
-# print("Dot product:", dot_product)
+values = np.array([10, 20, 30])
+weights = np.array([0.2, 0.5, 0.3])
 
+method1 = (values * weights).sum()
 
-# # -----------------TASK04----------------
-# import numpy as np
-
-# X = np.array([
-#     [2, 3],
-#     [4, 5],
-#     [6, 7]
-# ])
-
-# w = np.array([10, 2])
-
-# predictions = X @ w
-
-# print("Predictions:", predictions)
-
-
-# # --------------------TASK05----------------
-# import numpy as np
-
-# values = np.array([10, 20, 30])
-# weights = np.array([0.2, 0.5, 0.3])
-
-# method1 = (values * weights).sum()
-
-# print("Method 1:", method1)
+print("Method 1:", method1)
