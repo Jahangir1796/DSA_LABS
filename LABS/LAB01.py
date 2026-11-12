@@ -1,4 +1,14 @@
 import numpy as np
+scores = np.array([88, 72, 55, 91, 63])
+mask = scores >= 60          # array([ True, True, False, True, True])
+passed = scores[mask]        # array([88, 72, 91, 63])
+scores[scores < 60] = 0      # set every failing score to 0
+print(mask)
+print(passed)
+print(scores)
+
+
+
 # ------TASK01------------
 a = np.array([10, 20, 30])
 print("Shape: ", a.shape)
